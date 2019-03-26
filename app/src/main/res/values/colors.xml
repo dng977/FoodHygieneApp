@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="buttonBackground">#0E2288</color>
+    <color name="buttonText">#FFFFFF</color>
+    <color name="searchFrag">#6282DD</color>
+    <color name="favFrag">#388E3C</color>
+    <color name="infoFrag">#C2185B</color>
+    <color name="rating0">#FF0000</color>
+    <color name="rating1">#D32F2F</color>
+    <color name="rating2">#E64A19</color>
+    <color name="rating3">#F57C00</color>
+    <color name="rating4">#689F38</color>
+    <color name="rating5">#388E3C</color>
+    <color name="addToFavColor">#AD388E3C</color>
+    <color name="removeFromFavColor">#ADD32F2F</color>
+</resources>

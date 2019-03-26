@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">FoodHygieneRatings</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_favourites">Favourites</string>
+    <string name="menu_about">About</string>
+    <string name="testButton">Button</string>
+    <string name="searchButton">Search</string>
+    <string name="searchBar">Find a place to eat</string>
+    <string name="resultsBar">Sorted by</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="locationFilter">Filter by Location</string>
+    <string name="ratingFilter">Filter by Rating</string>
+    <string name="typeOfBFilter">Filter by Type of Business</string>
+    <string name="locRadioNearby">Nearby</string>
+    <string name="locRadioAddress">Enter Address</string>
+    <string name="distFromYou">Distance from you</string>
+    <string name="enterAddress">Address</string>
+    <string name="distance">distance</string>
+    <string name="rating_asc">rating asc</string>
+    <string name="relevance">relevance</string>
+    <string name="a_z">a-z</string>
+    <string name="z_a">z-a</string>
+    <string name="rating_desc">rating desc</string>
+
+</resources>

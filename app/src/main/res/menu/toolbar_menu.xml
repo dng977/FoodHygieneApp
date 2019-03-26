@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/distanceSort"
+        android:title="@string/distance" />
+    <item
+        android:id="@+id/ratingSort"
+        android:title="@string/rating_asc" />
+    <item
+        android:id="@+id/ratingDSort"
+        android:title="@string/rating_desc" />
+    <item
+        android:id="@+id/alphaSort"
+        android:title="@string/a_z" />
+    <item
+        android:id="@+id/alphaDSort"
+        android:title="@string/z_a" />
+    <item
+        android:id="@+id/relevanceSort"
+        android:title="@string/relevance" />
+</menu>
