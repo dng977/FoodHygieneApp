@@ -2,7 +2,10 @@ package com.example.foodhygieneratings;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,17 +13,10 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.TextView;
 
-import com.example.foodhygieneratings.search.EstDatabase;
+import com.example.foodhygieneratings.search.AppDatabase;
 import com.example.foodhygieneratings.search.Establishment;
 import com.example.foodhygieneratings.search.EstablishmentsAdapter;
-import com.example.foodhygieneratings.search.FilterQuery;
-import com.example.foodhygieneratings.search.OnBottomReachedListener;
-import com.example.foodhygieneratings.search.SearchRequestHandler;
-
-import org.json.JSONException;
 
 import java.util.ArrayList;
 
@@ -36,7 +32,7 @@ public class FavouritesFragment extends Fragment {
     private RecyclerView.Adapter recyclerViewAdapter;
     private RecyclerView.LayoutManager recyclerViewLayoutManager;
 
-    private EstDatabase database;
+    private AppDatabase database;
 
     public FavouritesFragment() {
         // Required empty public constructor
@@ -66,6 +62,21 @@ public class FavouritesFragment extends Fragment {
     }
     private void populateEstablishments(){
         establishments = (ArrayList<Establishment>)database.establishmentDao().retrieveAll();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        //CONFIG ACTION BAR
+        ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        supportActionBar.setTitle(R.string.menu_favourites);
+        supportActionBar.setSubtitle("");
+        setHasOptionsMenu(false);
+        if (supportActionBar != null){
+            supportActionBar.setDisplayHomeAsUpEnabled(false);
+            supportActionBar.setDisplayShowHomeEnabled(false);
+        }
+        setHasOptionsMenu(false);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

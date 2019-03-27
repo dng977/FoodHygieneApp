@@ -1,7 +1,6 @@
 package com.example.foodhygieneratings.search;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -36,7 +35,7 @@ public class SingleResultFragment extends Fragment implements View.OnClickListen
     }
     @Override
     public void setArguments(@Nullable Bundle args) {
-        queryResult = args.getString("resultJSON");
+        super.setArguments(args);
     }
 
     @Override
@@ -46,12 +45,13 @@ public class SingleResultFragment extends Fragment implements View.OnClickListen
        View v = inflater.inflate(R.layout.fragment_single_result, container, false);
         Button favButton = v.findViewById(R.id.addToFavButton);
         favButton.setOnClickListener(this);
+        this.queryResult = getArguments().getString("resultJSON");
 
         try {
             JSONObject jsonObject = new JSONObject(queryResult);
             establishment = new Establishment(jsonObject);
 
-            EstDatabase database = ((MainActivity)getActivity()).getDatabase();
+            AppDatabase database = ((MainActivity)getActivity()).getDatabase();
             if(database.establishmentDao().retrieveEstablishmentByID(establishment.getID()+ "") != null){
                 inFavourites = true;
             }
@@ -66,7 +66,7 @@ public class SingleResultFragment extends Fragment implements View.OnClickListen
             TextView indResultRating = v.findViewById(R.id.indResultRating);
             EstablishmentsAdapter.setRating(getResources(),establishment.getRatingValue(),indResultRating);
             TextView ratedOn = v.findViewById(R.id.indRatedOn);
-            ratedOn.setText("Rated on: " + establishment.getRatingDate());
+            ratedOn.setText(getResources().getString(R.string.date_of_last_inspection) + establishment.getRatingDate());
             TextView indResultAddress = v.findViewById(R.id.indResultAddress);
             indResultAddress.setText(establishment.getAddress());
         } catch (JSONException e) {
@@ -80,7 +80,7 @@ public class SingleResultFragment extends Fragment implements View.OnClickListen
         super.onActivityCreated(savedInstanceState);
 
         ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        supportActionBar.setTitle(establishment.getDistanceFromYou() + " miles away");
+        supportActionBar.setTitle(establishment.getDistanceString() + " " + getResources().getString(R.string.distance));
         supportActionBar.setSubtitle("");
         if (supportActionBar != null){
             supportActionBar.setDisplayHomeAsUpEnabled(true);
@@ -114,7 +114,7 @@ public class SingleResultFragment extends Fragment implements View.OnClickListen
         Log.e("onClick", "Tritggerd");
         if(v.getId() == R.id.addToFavButton){
             MainActivity activity = (MainActivity) getActivity();
-            EstDatabase database = activity.getDatabase();
+            AppDatabase database = activity.getDatabase();
             if(inFavourites){
                 database.establishmentDao().deleteEstablishmentByID(establishment.getID());
                 inFavourites = false;

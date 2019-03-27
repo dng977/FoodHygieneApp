@@ -40,8 +40,8 @@ public class NearbyFilter extends Fragment implements SeekBar.OnSeekBarChangeLis
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        distanceValue = seekBar.getProgress();
-        distance.setText(distanceValue + "km");
+        distanceValue = seekBar.getProgress() +1;
+        distance.setText(distanceValue + " miles");
     }
 
     @Override
@@ -77,7 +77,7 @@ public class NearbyFilter extends Fragment implements SeekBar.OnSeekBarChangeLis
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         changeDistance(progress);
-        distance.setText(distanceValue + "km");
+        distance.setText(distanceValue + " miles");
     }
 
     @Override

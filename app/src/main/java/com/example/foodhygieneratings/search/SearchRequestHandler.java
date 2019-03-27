@@ -22,6 +22,8 @@ import java.util.Map;
 
 public class SearchRequestHandler {
     public static enum QUERYTYPE{
+        regions,
+        authorities,
         businessTypes,
         establishments,
         pageNumber
@@ -45,6 +47,14 @@ public class SearchRequestHandler {
                     //Toast.makeText(fragment.getContext(), "Response Received!", Toast.LENGTH_SHORT).show();
                     JSONArray resultsArray;
                     switch(queryType){
+                        case regions:
+                            resultsArray = response.getJSONArray("regions/basic");
+                            fragment.responseSuccess(resultsArray,queryType);
+                            break;
+                        case authorities:
+                            resultsArray = response.getJSONArray("authorities");
+                            fragment.responseSuccess(resultsArray,queryType);
+                            break;
                         case establishments:
                             resultsArray = response.getJSONArray(queryType.toString());
                             fragment.responseSuccess(resultsArray,queryType);

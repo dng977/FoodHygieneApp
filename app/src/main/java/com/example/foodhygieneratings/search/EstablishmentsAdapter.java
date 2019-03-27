@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,6 @@ public class EstablishmentsAdapter extends RecyclerView.Adapter<EstablishmentsAd
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView resultInfoText;
-        public Button moreInfoButton;
         public TextView additionalInfoText;
         public TextView ratingText;
         public TextView addressText;
@@ -37,7 +37,6 @@ public class EstablishmentsAdapter extends RecyclerView.Adapter<EstablishmentsAd
             ratingText = itemView.findViewById(R.id.ratingText);
             resultInfoText = itemView.findViewById(R.id.resultNameText);
             additionalInfoText = itemView.findViewById(R.id.moreInfoText);
-            moreInfoButton = itemView.findViewById(R.id.moreInfoButton);
             addressText = itemView.findViewById(R.id.resultAddressText);
             itemView.setOnClickListener(this);
 
@@ -96,10 +95,8 @@ public class EstablishmentsAdapter extends RecyclerView.Adapter<EstablishmentsAd
 
         TextView resultInfoText = viewHolder.resultInfoText;
         resultInfoText.setText(establishment.getName());
-        //Button moreInfoButton = viewHolder.moreInfoButton;
-        //moreInfoButton.setText(position + " More info");
         TextView additionalInfoText = viewHolder.additionalInfoText;
-        additionalInfoText.setText("distance " + establishment.getDistanceFromYou());
+        additionalInfoText.setText(establishment.getDistanceString() + " " + resources.getString(R.string.distance));
         TextView ratingText = viewHolder.ratingText;
         setRating(resources, establishment.getRatingValue(),ratingText);
         TextView addressText = viewHolder.addressText;
@@ -131,6 +128,9 @@ public class EstablishmentsAdapter extends RecyclerView.Adapter<EstablishmentsAd
                 break;
             case "5":
                 ratingText.setBackgroundColor(resources.getColor(R.color.rating5));
+                break;
+            default:
+                ratingText.setBackgroundColor(resources.getColor(R.color.ratingDue));
                 break;
         }
     }

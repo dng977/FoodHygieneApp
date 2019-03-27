@@ -41,6 +41,7 @@ public class SearchResultsFragment extends Fragment implements HttpResponseListe
     private String rawQuery;
     private FilterQuery filterQuery;
     private SearchRequestHandler searchRequestHandler;
+    private String sortString;
 
     public SearchResultsFragment() {
         // Required empty public constructor
@@ -57,14 +58,18 @@ public class SearchResultsFragment extends Fragment implements HttpResponseListe
     }
     @Override
     public void setArguments(@Nullable Bundle args) {
-        queryResults = args.getString("resultsJSON");
-        rawQuery = args.getString("rawQuery");
+        super.setArguments(args);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_search_results, container, false);
+        if(queryResults == null)
+            queryResults = getArguments().getString("resultsJSON");
+        if(rawQuery == null)
+            rawQuery = getArguments().getString("rawQuery");
+
         filterQuery = new FilterQuery(rawQuery);
         establishments = new ArrayList<Establishment>();
         if (queryResults != null){
@@ -103,6 +108,11 @@ public class SearchResultsFragment extends Fragment implements HttpResponseListe
 
         ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         supportActionBar.setTitle(R.string.resultsBar);
+        if(sortString == null)
+            supportActionBar.setSubtitle("distance");
+        else{
+            supportActionBar.setSubtitle(sortString);
+        }
         if (supportActionBar != null){
             supportActionBar.setDisplayHomeAsUpEnabled(true);
             supportActionBar.setDisplayShowHomeEnabled(true);
@@ -118,7 +128,6 @@ public class SearchResultsFragment extends Fragment implements HttpResponseListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         String query;
-        String sortString;
         switch (item.getItemId()) {
             case android.R.id.home:
                 getActivity().getSupportFragmentManager().popBackStack();
@@ -150,6 +159,7 @@ public class SearchResultsFragment extends Fragment implements HttpResponseListe
             default:
                 return super.onOptionsItemSelected(item);
         }
+
         Log.e("onOptionsItemSelected", "--");
         filterQuery.setPageNumber(1);
         query = filterQuery.getQueryString();
@@ -157,6 +167,7 @@ public class SearchResultsFragment extends Fragment implements HttpResponseListe
         searchRequestHandler.httpRequest(getContext(),query, SearchRequestHandler.QUERYTYPE.establishments);
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle(sortString);
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -166,6 +177,7 @@ public class SearchResultsFragment extends Fragment implements HttpResponseListe
     public void responseSuccess(JSONArray resultsArray, SearchRequestHandler.QUERYTYPE queryType) {
         try {
             Log.e("RESPONSE: ", resultsArray.toString());
+            queryResults = resultsArray.toString();
             switch(queryType){
                 case establishments:
                     populateEstablishments(resultsArray.toString(), true);

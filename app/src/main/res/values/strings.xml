@@ -8,21 +8,27 @@
     <string name="searchBar">Find a place to eat</string>
     <string name="resultsBar">Sorted by</string>
 
+    <string name="loc_request">The application is about to request access to your location.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="infoFragment">This application uses the Food Standards Agency rating schemes for providing hygiene ratings of places: \n\n
+    \"The food hygiene rating or inspection result given to a business reflects the standards of food hygiene found on the date of inspection or visit by the local authority. The food hygiene rating is not a guide to food quality.\"
+    </string>
     <string name="locationFilter">Filter by Location</string>
     <string name="ratingFilter">Filter by Rating</string>
     <string name="typeOfBFilter">Filter by Type of Business</string>
     <string name="locRadioNearby">Nearby</string>
-    <string name="locRadioAddress">Enter Address</string>
+    <string name="locRadioAddress">Choose location</string>
     <string name="distFromYou">Distance from you</string>
     <string name="enterAddress">Address</string>
-    <string name="distance">distance</string>
+    <string name="enterAuthority">Authority(City)</string>
+    <string name="distance">miles away</string>
     <string name="rating_asc">rating asc</string>
     <string name="relevance">relevance</string>
     <string name="a_z">a-z</string>
     <string name="z_a">z-a</string>
     <string name="rating_desc">rating desc</string>
+    <string name="local_authority_city">Local Authority:</string>
+    <string name="date_of_last_inspection">Date of last inspection: </string>
 
 </resources>

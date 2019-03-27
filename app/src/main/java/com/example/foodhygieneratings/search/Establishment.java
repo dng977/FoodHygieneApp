@@ -5,10 +5,12 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.Random;
 
 
@@ -38,6 +40,8 @@ public class Establishment {
     private String ratingValue;
     @Ignore
     private String ratingDate;
+    @Ignore
+    private double distanceFromYou;
 
     public Establishment(String jsonObject){
         this.jsonObject = jsonObject;
@@ -80,9 +84,13 @@ public class Establishment {
 
         this.ratingDate = establishmentJson.getString("RatingDate");
         this.ratingDate = this.ratingDate.substring(0,10);
+
+        this.distanceFromYou = establishmentJson.getDouble("Distance");
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
     }
 
     public String getJsonObject() {
@@ -94,7 +102,11 @@ public class Establishment {
     }
 
     public double getDistanceFromYou(){
-        return -1;
+        return distanceFromYou;
+    }
+    public String getDistanceString(){
+        DecimalFormat df = new DecimalFormat("#.##");
+        return  df.format(this.distanceFromYou);
     }
 
     public String getName(){

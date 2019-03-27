@@ -7,13 +7,14 @@ public class FilterQuery {
     private String address;
     private int rating;
     private int businessID;
+
     private final String schemeTypeKeyQuery = "schemeTypeKey=FHRS";
     private int pageSize;
     private int pageNumber;
 
-    private float distanceFromYou;
-    private float latitude;
-    private float longitude;
+    private int distanceFromYou;
+    private double latitude;
+    private double longitude;
     private boolean locationSet = false;
 
     private String sortFilter;
@@ -24,8 +25,9 @@ public class FilterQuery {
         this.query += schemeTypeKeyQuery;
         this.pageSize = 40;
         this.pageNumber = 1;
-        this.sortFilter = "&sortOptionKey=" + "relevance";
+        this.sortFilter = "&sortOptionKey=" + "distance";
         this.queryType = "establishments";
+        this.distanceFromYou = 500;
         this.query = queryType + this.query;
 
     }
@@ -33,7 +35,7 @@ public class FilterQuery {
         this.query = rawQuery;
         this.pageSize = 50;
         this.pageNumber = 1;
-        this.sortFilter = "&sortOptionKey=" + "relevance";
+        this.sortFilter = "&sortOptionKey=" + "distance";
     }
 
     public void addName(String name) {
@@ -54,10 +56,18 @@ public class FilterQuery {
         this.pageNumber = pageNumber;
     }
 
-    public void setCoodinates(float latitude, float longitude){
+    /**
+     *
+     * @param latitude
+     * @param longitude
+     */
+    public void setCoodinates(double latitude, double longitude){
         this.latitude = latitude;
         this.longitude = longitude;
-        locationSet = true;
+    }
+    public void addCoordinates(double latitude, double longitude){
+        setCoodinates(latitude,longitude);
+        this.query += "&longitude=" + longitude + "&latitude=" + latitude;
     }
     public String getPageNumberQuery(){
         return  "&pageNumber=" + this.pageNumber;
@@ -66,22 +76,25 @@ public class FilterQuery {
         return  "&pageSize=" + this.pageSize;
     }
 
-    public void addDistanceFromYou(float distanceFromYou) {
-        if(locationSet)
-            this.query += "&longitude=" + longitude + "&latitude=" + latitude
-                    + "&maxDistanceLimit=" + distanceFromYou;
-        else
-            this.distanceFromYou = distanceFromYou;
+    public void addDistanceFromYou(int distanceFromYou){
+        this.query += "&maxDistanceLimit=" + distanceFromYou;
     }
-
+    private String getDistanceFromYou(){
+        return "&maxDistanceLimit=" + distanceFromYou;
+    }
     public void addAddress(String address) {
-        this.query += "&address=" + address;
+        if(!address.matches("[/s]*")) {
+            this.query += "&address=" + address;
+        }
     }
 
     public void addRating(int rating) {
         this.query += "&ratingKey=" + rating +"&ratingOperatorKey=GreaterThanOrEqual";
     }
 
+    public void addLocalAuthority(int localAuthId){
+            this.query += "&localAuthorityId=" + localAuthId;
+    }
     public void addBusinessType(int businessID) {
         if(businessID != -1)
             this.query += "&businessTypeId=" + businessID;
@@ -97,4 +110,6 @@ public class FilterQuery {
     public void increasePageNumber() {
         this.pageNumber++;
     }
+
+
 }
