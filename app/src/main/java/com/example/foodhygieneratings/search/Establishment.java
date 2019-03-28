@@ -42,6 +42,10 @@ public class Establishment {
     private String ratingDate;
     @Ignore
     private double distanceFromYou;
+    @Ignore
+    private double latitude;
+    @Ignore
+    private double longitude;
 
     public Establishment(String jsonObject){
         this.jsonObject = jsonObject;
@@ -85,11 +89,16 @@ public class Establishment {
         this.ratingDate = establishmentJson.getString("RatingDate");
         this.ratingDate = this.ratingDate.substring(0,10);
 
-        this.distanceFromYou = establishmentJson.getDouble("Distance");
+        if(!establishmentJson.isNull("Distance"))
+            this.distanceFromYou = establishmentJson.getDouble("Distance");
+
+
+        JSONObject geocode = establishmentJson.getJSONObject("geocode");
+        this.latitude = geocode.getDouble("latitude");
+        this.longitude = geocode.getDouble("longitude");
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
 
     }
 
@@ -145,5 +154,13 @@ public class Establishment {
 
     public String getRatingDate() {
         return ratingDate;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
     }
 }

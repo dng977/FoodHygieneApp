@@ -25,9 +25,14 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.foodhygieneratings.search.AppDatabase;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     private Toolbar toolbar;
     private Fragment fragment;
     private FragmentManager fm;

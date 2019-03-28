@@ -29,6 +29,8 @@
     <string name="z_a">z-a</string>
     <string name="rating_desc">rating desc</string>
     <string name="local_authority_city">Local Authority:</string>
-    <string name="date_of_last_inspection">Date of last inspection: </string>
+    <string name="date_of_last_inspection">Date of last inspection:</string>
+    <string name="address">Address:</string>
+    <string name="type">Type:</string>
 
 </resources>

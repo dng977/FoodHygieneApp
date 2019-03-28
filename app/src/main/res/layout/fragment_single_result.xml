@@ -10,7 +10,7 @@
         android:id="@+id/indResultRating"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:background="@color/favFrag"
         android:text="R"
         android:textAlignment="center"
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:text="Name, Info"
         android:textAlignment="center"
@@ -36,9 +36,9 @@
 
     <TextView
         android:id="@+id/indResultAddress"
-        android:layout_width="187dp"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="Address"
         android:textAlignment="center"
         android:textSize="12sp"
@@ -48,11 +48,12 @@
 
     <Button
         android:id="@+id/addToFavButton"
-        android:layout_width="214dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="219dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
         android:onClick="onClick"
         android:text="Add to Favourites"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,8 +63,8 @@
         android:id="@+id/indBusinessType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Type:"
+        android:layout_marginTop="8dp"
+        android:text="@string/type"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -71,13 +72,43 @@
         app:layout_constraintTop_toBottomOf="@+id/indResultName" />
 
     <TextView
+        android:id="@+id/addressTypeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/address"
+        android:textAlignment="center"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/indResultAddress"
+        app:layout_constraintEnd_toStartOf="@+id/indResultAddress"
+        app:layout_constraintHorizontal_bias="0.853"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/indResultAddress"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
         android:id="@+id/indRatedOn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:text="@string/date_of_last_inspection"
         android:textAlignment="center"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/indResultRating" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addToFavButton" />
+
 </android.support.constraint.ConstraintLayout>
